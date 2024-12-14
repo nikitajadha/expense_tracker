@@ -31,13 +31,10 @@ function App() {
       });
   };
 
-  // Conversion rate for USD to INR (1 USD = 83 INR)
-  const USD_TO_INR = 83;
-
   return (
     <div className="container mt-5">
-      <div className="row ">
-        <div className="col-md-6 ">
+      <div className="row">
+        <div className="col-md-6">
           <div className="text-center mb-4">
             <h1 className="display-4 text-primary font-weight-bold">Expense Tracker</h1>
             <p className="mb-5">Track your daily expenses easily.</p>
@@ -56,7 +53,7 @@ function App() {
               />
             </div>
             <div className="form-group mb-3">
-              <label className="font-weight-bold">Amount (USD)</label>
+              <label className="font-weight-bold">Amount (₹)</label>
               <input
                 type="number"
                 className="form-control rounded-3 shadow-sm"
@@ -98,7 +95,7 @@ function App() {
                 {expenses.map((expense, index) => (
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-3 rounded-3">
                     <div>
-                      <strong>{expense.description}</strong> - ₹{(expense.amount * USD_TO_INR).toFixed(2)} ({expense.category})
+                      <strong>{expense.description}</strong> - ₹{expense.amount} ({expense.category})
                     </div>
                     <span className="badge bg-info text-dark rounded-pill">{new Date(expense.date).toLocaleDateString()}</span>
                   </li>
@@ -114,7 +111,7 @@ function App() {
         <ul className="list-group">
           {summary.map((item, index) => (
             <li key={index} className="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-3 rounded-3">
-              <strong>{item._id}</strong>: <span className="text-success">₹{(item.total * USD_TO_INR).toFixed(2)}</span>
+              <strong>{item._id}</strong>: <span className="text-success">₹{item.total}</span>
             </li>
           ))}
         </ul>
