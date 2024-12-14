@@ -31,6 +31,9 @@ function App() {
       });
   };
 
+  // Conversion rate for USD to INR (1 USD = 83 INR)
+  const USD_TO_INR = 83;
+
   return (
     <div className="container mt-5">
       <div className="row ">
@@ -53,7 +56,7 @@ function App() {
               />
             </div>
             <div className="form-group mb-3">
-              <label className="font-weight-bold">Amount ($)</label>
+              <label className="font-weight-bold">Amount (USD)</label>
               <input
                 type="number"
                 className="form-control rounded-3 shadow-sm"
@@ -78,7 +81,6 @@ function App() {
           </form>
         </div>
 
-       
         <div className="col-md-6 mt-3">
           <div className="text-center m-5">
             <button
@@ -96,7 +98,7 @@ function App() {
                 {expenses.map((expense, index) => (
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-3 rounded-3">
                     <div>
-                      <strong>{expense.description}</strong> - ${expense.amount} ({expense.category})
+                      <strong>{expense.description}</strong> - ₹{(expense.amount * USD_TO_INR).toFixed(2)} ({expense.category})
                     </div>
                     <span className="badge bg-info text-dark rounded-pill">{new Date(expense.date).toLocaleDateString()}</span>
                   </li>
@@ -106,16 +108,17 @@ function App() {
           )}
         </div>
       </div>
+
       <div className="summary-section m-5 p-4 shadow-lg border-0 bg-light rounded-3">
-            <h3 className="text-success mb-3">Summary by Category</h3>
-            <ul className="list-group">
-              {summary.map((item, index) => (
-                <li key={index} className="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-3 rounded-3">
-                  <strong>{item._id}</strong>: <span className="text-success">${item.total}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <h3 className="text-success mb-3">Summary by Category</h3>
+        <ul className="list-group">
+          {summary.map((item, index) => (
+            <li key={index} className="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-3 rounded-3">
+              <strong>{item._id}</strong>: <span className="text-success">₹{(item.total * USD_TO_INR).toFixed(2)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
