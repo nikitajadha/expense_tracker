@@ -10,10 +10,10 @@ function App() {
   const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:8055/api/expenses')
+    axios.get('https://expensebackend-seven.vercel.app/api/expenses')
       .then(response => setExpenses(response.data));
 
-    axios.get('http://localhost:8055/api/summary')
+    axios.get('https://expensebackend-seven.vercel.app/api/summary')
       .then(response => setSummary(response.data));
   }, []);
 
@@ -21,12 +21,12 @@ function App() {
     e.preventDefault();
     const newExpense = { description, amount, category };
 
-    axios.post('http://localhost:8055/api/expenses', newExpense)
+    axios.post('https://expensebackend-seven.vercel.app/api/expenses', newExpense)
       .then(() => {
         setDescription('');
         setAmount('');
         setCategory('');
-        axios.get('http://localhost:8055/api/expenses')
+        axios.get('https://expensebackend-seven.vercel.app/api/expenses')
           .then(response => setExpenses(response.data));
       });
   };
